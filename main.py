@@ -1,4 +1,7 @@
-import pygame, sys, random
+import pygame
+import sys
+import random
+
 
 def ball_animation():
     global ball_speed_x, ball_speed_y
@@ -34,6 +37,7 @@ def player_animation():
     if player.bottom >= 960:
         player.bottom = 960
 
+
 def opponent_animation():
     if opponent.top < ball.y:
         opponent.top += opponent_speed
@@ -44,11 +48,13 @@ def opponent_animation():
     if opponent.bottom >= 960:
         opponent.bottom = 960
 
+
 def ball_restart():
     global ball_speed_x, ball_speed_y
     ball.center = (1280 / 2, 960 / 2)
     ball_speed_y *= random.choice((1, -1))
     ball_speed_x *= random.choice((1, -1))
+
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -66,12 +72,12 @@ player_speed = 0
 opponent_speed = 7
 
 while True:
-    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 player_speed += 7
@@ -92,6 +98,6 @@ while True:
     pygame.draw.rect(screen, (200, 200, 200), opponent, border_radius=2)
     pygame.draw.ellipse(screen, (200, 200, 200), ball)
     pygame.draw.aaline(screen, (200, 200, 200), (1280 / 2, 0), (1280 / 2, 960))
-    
+
     pygame.display.flip()
     clock.tick(60)
